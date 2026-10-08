@@ -5,8 +5,6 @@ set -e
 cd "$(dirname "$0")"
 
 GHOSTTY_REV="8f0dd3709050b1026f6324368805033197d8b4a5"
-ZIG_WANT="0.17.0"
-ZIG_URL="https://ziglang.org/download/${ZIG_WANT}/zig-x86_64-linux-${ZIG_WANT}.tar.xz"
 VT_A="third_party/ghostty/zig-out/lib/libghostty-vt.a"
 RHUN="vendor/rhun"
 
@@ -17,28 +15,19 @@ if [ ! -f "$RHUN/src/rhun.inc" ]; then
 fi
 test -f "$RHUN/src/rhun.inc" || { echo "odos: $RHUN/src/rhun.inc missing"; exit 1; }
 
-# ---- Zig (system >= 0.16, else local tarball) ----
+# ---- Zig (system, >= 0.16; never fetched automatically) ----
 ZIG=""
 if command -v zig >/dev/null 2>&1; then
     zv=$(zig version)
     major=${zv%%.*}; rest=${zv#*.}; minor=${rest%%.*}
     if [ "$major" -gt 0 ] || [ "$minor" -ge 16 ] 2>/dev/null; then
         ZIG=zig
-    else
-        echo "odos: system zig $zv too old, fetching $ZIG_WANT"
     fi
 fi
 if [ -z "$ZIG" ]; then
-    ZIGDIR="third_party/zig-${ZIG_WANT}"
-    if [ ! -x "${ZIGDIR}/zig" ]; then
-        echo "odos: fetching Zig ${ZIG_WANT}..."
-        mkdir -p third_party
-        curl -fsSL -o third_party/zig.tar.xz "$ZIG_URL"
-        tar -xf third_party/zig.tar.xz -C third_party
-        mv "third_party/zig-x86_64-linux-${ZIG_WANT}" "$ZIGDIR"
-        rm -f third_party/zig.tar.xz
-    fi
-    ZIG="$(pwd)/${ZIGDIR}/zig"
+    echo "odos: Zig >= 0.16 required to build libghostty-vt (have: ${zv:-none})"
+    echo "odos: install it yourself (pacman -S zig, or https://ziglang.org/download/)"
+    exit 1
 fi
 
 # ---- ghostty freestanding VT static lib ----
