@@ -1,0 +1,3 @@
+[submodule "vendor/rhun"]
+	path = vendor/rhun
+	url = https://github.com/vshvedov/rhun

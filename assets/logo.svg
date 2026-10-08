@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="#16181d"/>
+  <!-- two ways merging: rhun UI + ghostty VT becoming one odos -->
+  <path d="M 30 44 C 55 44, 55 64, 80 64 L 93 64" fill="none" stroke="#8fa3bf" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 30 84 C 55 84, 55 64, 80 64 L 93 64" fill="none" stroke="#8fa3bf" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="100" cy="64" r="7" fill="#e8e4d8"/>
+</svg>

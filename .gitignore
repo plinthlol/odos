@@ -1,0 +1,15 @@
+# build outputs
+build/
+*.o
+*.a
+
+# ghostty is fetched at build time (see third_party/README.md), never committed
+third_party/ghostty/
+third_party/zig-out/
+third_party/.zig-cache/
+
+# editor + os noise
+.vscode/
+*.swp
+*~
+.DS_Store
